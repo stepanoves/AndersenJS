@@ -1,6 +1,13 @@
+function isNumber() {
+    for (var i = 0; i < arguments.length; i++) {
+        if (typeof arguments[i] != "number")
+            return false;
+    }
+    return true;
+}
 //task 1
 function compareTwoNumbers(first, second) {
-    if (!isFinite(+first) || !isFinite(+second))
+    if (!isNumber(first, second))
         return 'invalid arguments';
     return first > second;
 }
@@ -25,6 +32,8 @@ function addCheckedProperty(object) {
 
 //task 5
 function printNumbers(number) {
+    if (!isNumber(number))
+        return 'invalid arguments';
     //solution 1
     for (var i = 0; i <= number; i++) {
         console.log(i);
