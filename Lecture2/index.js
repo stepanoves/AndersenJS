@@ -44,6 +44,13 @@ function printNumbers(number) {
 
     //solution 2
     for (var j = 0; j <= number; j++) {
-        console.log(j + ' ' + (number - j));
+        console.log(j + ' | ' + (number - j));
+    }
+
+    var count = 0;
+    while(count <= number) {
+        console.log(count + ' | ' + -count);
+        count++;
     }
 }
+printNumbers(6);
