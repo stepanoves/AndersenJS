@@ -1,0 +1,21 @@
+.container {
+    padding-top: 20px;
+}
+
+.calculation {
+    display: block;
+    text-align: right;
+}
+
+.row button {
+    margin-top: 5px;
+}
+
+.btn {
+    width: 60px;
+    margin-left: 5px;
+}
+
+.btn-light {
+    border: 2px solid rgba(4,4,4,0.47);
+}
