@@ -19,3 +19,16 @@
 .btn-light {
     border: 2px solid rgba(4,4,4,0.47);
 }
+
+.history {
+    margin-top: 24px;
+}
+
+.history_result {
+    height: 100%;
+    border: 1px solid rgba(4,4,4,0.1);
+    overflow-y: auto;
+}
+.history_element:hover {
+    background-color: rgba(0,0,4,0.18);
+}

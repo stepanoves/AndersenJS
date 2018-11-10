@@ -8,44 +8,53 @@
 </head>
 <body>
     <div class="container">
-        <div class="col-3">
-            <div class="row calculation">
-                <label for="calculation">asd</label>
-            </div>
-            <div class="row">
-                <input type="text" class="form-control calculation" id="calculation" disabled>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-secondary">(</button>
-                <button type="button" class="btn btn-secondary">)</button>
-                <button type="button" class="btn btn-secondary">%</button>
-                <button type="button" class="btn btn-secondary">C</button>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-light">7</button>
-                <button type="button" class="btn btn-light">8</button>
-                <button type="button" class="btn btn-light">9</button>
-                <button type="button" class="btn btn-secondary">÷</button>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-light">4</button>
-                <button type="button" class="btn btn-light">5</button>
-                <button type="button" class="btn btn-light">6</button>
-                <button type="button" class="btn btn-secondary">×</button>
+        <div class="row">
+            <div class="col-3">
+                <div class="row calculation temp">
+                    <label for="calculation"></label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control calc_field calculation" id="calculation" disabled>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-secondary">(</button>
+                    <button type="button" class="btn btn-secondary">)</button>
+                    <button type="button" class="btn btn-secondary">%</button>
+                    <button type="button" class="btn btn-secondary clear">C</button>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-light calc_button">7</button>
+                    <button type="button" class="btn btn-light calc_button">8</button>
+                    <button type="button" class="btn btn-light calc_button">9</button>
+                    <button type="button" class="btn btn-secondary calc_button"> / </button>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-light calc_button">4</button>
+                    <button type="button" class="btn btn-light calc_button">5</button>
+                    <button type="button" class="btn btn-light calc_button">6</button>
+                    <button type="button" class="btn btn-secondary calc_button"> * </button>
 
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-light">1</button>
-                <button type="button" class="btn btn-light">2</button>
-                <button type="button" class="btn btn-light">3</button>
-                <button type="button" class="btn btn-secondary">-</button>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-light calc_button">1</button>
+                    <button type="button" class="btn btn-light calc_button">2</button>
+                    <button type="button" class="btn btn-light calc_button">3</button>
+                    <button type="button" class="btn btn-secondary calc_button"> - </button>
 
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-light calc_button">0</button>
+                    <button type="button" class="btn btn-light calc_button">.</button>
+                    <button type="button" class="btn btn-primary equally_button">=</button>
+                    <button type="button" class="btn btn-secondary calc_button"> + </button>
+                </div>
             </div>
-            <div class="row">
-                <button type="button" class="btn btn-light">0</button>
-                <button type="button" class="btn btn-light">.</button>
-                <button type="button" class="btn btn-primary">=</button>
-                <button type="button" class="btn btn-secondary">+</button>
+            <div class="col-3 history">
+                <div class="alert alert-primary" role="alert">
+                    История
+                </div>
+                <div class="col-12 history_result">
+                </div>
             </div>
         </div>
     </div>
