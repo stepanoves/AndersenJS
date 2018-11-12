@@ -6,6 +6,11 @@ var clearButton = document.querySelector(".clear");
 var historyResult = document.querySelector(".history_result");
 var hideHistoryButton = document.querySelector(".hide_button");
 
+function isOperation(symbol) {
+    var operations = '/*-+^';
+    return operations.indexOf(symbol) !== -1;
+}
+
 function parseExpression(expression) {
     var expressionArr = expression.split(' ');
     var newExpression = '';
@@ -31,7 +36,11 @@ function clickHideButton() {
 }
 
 function clickCalcButton(button) {
-    calcField.value += button.innerText + ' ';
+    if (isOperation(button.innerText)) {
+        calcField.value += ' ' + button.innerText + ' ';
+    } else {
+        calcField.value += button.innerText;
+    }
 }
 
 function clickEquallyButton() {
@@ -72,9 +81,27 @@ function clickClearButton() {
     calcField.value = '';
 }
 
+function fillCalcFieldByKeyboard(event) {
+    var allowedCharacters = '()1234567890^./*-+';
+    var code = event.key;
+    if (code === '=') {
+        clickEquallyButton();
+    }
+    if (allowedCharacters.indexOf(code)  !== -1) {
+        if (isOperation(code)) {
+            calcField.value += ' ' + code + ' ';
+        } else {
+            calcField.value += code;
+        }
+    } else {
+        return false;
+    }
+}
+
 equallyButton.addEventListener('click', clickEquallyButton);
 clearButton.addEventListener('click', clickClearButton);
 hideHistoryButton.addEventListener('click', clickHideButton);
+document.addEventListener('keydown', fillCalcFieldByKeyboard);
 
 for( var i = 0; i < calcButtons.length; i++ ) {
     calcButtons[i].addEventListener('click', clickCalcButton.bind( null, calcButtons[i]) );
