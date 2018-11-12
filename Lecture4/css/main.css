@@ -32,3 +32,9 @@
 .history_element:hover {
     background-color: rgba(0,0,4,0.18);
 }
+
+.hide_button {
+    font-size: x-small;
+    margin-top: 5px;
+    float: right;
+}

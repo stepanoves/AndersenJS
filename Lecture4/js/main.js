@@ -4,18 +4,40 @@ var equallyButton = document.querySelector(".equally_button");
 var tempField = document.querySelector(".temp");
 var clearButton = document.querySelector(".clear");
 var historyResult = document.querySelector(".history_result");
+var hideHistoryButton = document.querySelector(".hide_button");
+
+function parseExpression(expression) {
+    var expressionArr = expression.split(' ');
+    var newExpression = '';
+    for (var i = 0; i < expressionArr.length; i++) {
+        if (expressionArr[i+1] === '^') {
+            newExpression += 'Math.pow(' + expressionArr[i] + ',' + expressionArr[i+2]+ ')'
+            i += 2;
+        } else {
+            newExpression += expressionArr[i];
+        }
+    }
+    return newExpression;
+}
+
+function clickHideButton() {
+    if (hideHistoryButton.innerText === 'Скрыть') {
+        historyResult.setAttribute('hidden', '');
+        hideHistoryButton.innerText = 'Показать';
+    } else {
+        historyResult.removeAttribute('hidden');
+        hideHistoryButton.textContent = 'Скрыть';
+    }
+}
 
 function clickCalcButton(button) {
-    if (Calculate.isOperation(button.innerText)) {
-        calcField.value += ' ' + button.innerText + ' ';
-    } else {
-        calcField.value += button.innerText;
-    }
+    calcField.value += button.innerText + ' ';
 }
 
 function clickEquallyButton() {
     tempField.innerText = calcField.value;
-    calcField.value = Calculate.getResult(calcField.value);
+    console.log(parseExpression(calcField.value));
+    calcField.value = eval(parseExpression(calcField.value));
 
     var historyElement = document.createElement('div');
     historyElement.setAttribute('class', 'row history_element');
@@ -38,7 +60,6 @@ function clickEquallyButton() {
 }
 
 function clickHistoryElement(historyElement) {
-    //var historyElement = document.querySelector('.history_element');
     var equation = historyElement.querySelector('.col-8');
     var result = historyElement.querySelector('.col-4');
 
@@ -53,51 +74,8 @@ function clickClearButton() {
 
 equallyButton.addEventListener('click', clickEquallyButton);
 clearButton.addEventListener('click', clickClearButton);
+hideHistoryButton.addEventListener('click', clickHideButton);
 
 for( var i = 0; i < calcButtons.length; i++ ) {
     calcButtons[i].addEventListener('click', clickCalcButton.bind( null, calcButtons[i]) );
 }
-
-
-var Calculate = (function () {
-
-    var operations = {
-       "+": function (a, b) {
-           return a + b;
-       },
-       "-": function (a, b) {
-           return a - b;
-       },
-       "*": function (a, b) {
-           return a * b;
-       },
-       "/": function (a, b) {
-           return a / b;
-       }
-    };
-
-    return {
-        isOperation: function (opr) {
-            return operations[opr];
-        },
-       getResult: function (str) {
-           var result = 0;
-           var splitStr = str.split(" ");
-           var i = 1;
-           if(operations[splitStr[0]]) {
-               result += operations[splitStr[0]](result, +splitStr[1]);
-               i = 2;
-           } else {
-               result += +splitStr[0];
-           }
-           for(i; i < splitStr.length; i++) {
-               //console.log(i);
-               if (operations[splitStr[i]]) {
-                   result = operations[splitStr[i]](result, +splitStr[i + 1]);
-               }
-           }
-
-           return result;
-       }
-    }
-})();
