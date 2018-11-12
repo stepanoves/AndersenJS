@@ -84,7 +84,7 @@ function clickClearButton() {
 function fillCalcFieldByKeyboard(event) {
     var allowedCharacters = '()1234567890^./*-+';
     var code = event.key;
-    if (code === '=') {
+    if (code === '=' || code === 'Enter') {
         clickEquallyButton();
     }
     if (allowedCharacters.indexOf(code)  !== -1) {
