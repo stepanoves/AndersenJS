@@ -7,6 +7,10 @@
     text-align: right;
 }
 
+.calculation temp {
+    height: 24px;
+}
+
 .row button {
     margin-top: 5px;
 }
@@ -14,6 +18,15 @@
 .btn {
     width: 60px;
     margin-left: 5px;
+}
+
+.backspace_button {
+    margin-left: 0px;
+    width: 100%;
+}
+
+.calc_buttons {
+    margin-left: 10px;
 }
 
 .btn-light {

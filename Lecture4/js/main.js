@@ -5,6 +5,7 @@ var tempField = document.querySelector(".temp");
 var clearButton = document.querySelector(".clear");
 var historyResult = document.querySelector(".history_result");
 var hideHistoryButton = document.querySelector(".hide_button");
+var backspaceButton = document.querySelector(".backspace_button");
 
 function isOperation(symbol) {
     var operations = '/*-+^';
@@ -45,7 +46,6 @@ function clickCalcButton(button) {
 
 function clickEquallyButton() {
     tempField.innerText = calcField.value;
-    console.log(parseExpression(calcField.value));
     calcField.value = eval(parseExpression(calcField.value));
 
     var historyElement = document.createElement('div');
@@ -81,11 +81,18 @@ function clickClearButton() {
     calcField.value = '';
 }
 
-function fillCalcFieldByKeyboard(event) {
+function clickBackspaceButton() {
+    calcField.value = calcField.value.slice(0, calcField.value.length - 1);
+}
+
+function changeCalcFieldByKeyboard(event) {
     var allowedCharacters = '()1234567890^./*-+';
     var code = event.key;
     if (code === '=' || code === 'Enter') {
         clickEquallyButton();
+    }
+    if (code === 'Backspace') {
+        clickBackspaceButton();
     }
     if (allowedCharacters.indexOf(code)  !== -1) {
         if (isOperation(code)) {
@@ -101,7 +108,8 @@ function fillCalcFieldByKeyboard(event) {
 equallyButton.addEventListener('click', clickEquallyButton);
 clearButton.addEventListener('click', clickClearButton);
 hideHistoryButton.addEventListener('click', clickHideButton);
-document.addEventListener('keydown', fillCalcFieldByKeyboard);
+backspaceButton.addEventListener('click', clickBackspaceButton);
+document.addEventListener('keydown', changeCalcFieldByKeyboard);
 
 for( var i = 0; i < calcButtons.length; i++ ) {
     calcButtons[i].addEventListener('click', clickCalcButton.bind( null, calcButtons[i]) );
