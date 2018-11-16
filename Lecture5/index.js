@@ -26,6 +26,7 @@ function promisifySetTimeout(func, delay) {
 }
 
 function promisifyXMLHttpRequest(url, method) {
+
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest(url);
         xhr.open(url, method, true);
@@ -39,4 +40,27 @@ function promisifyXMLHttpRequest(url, method) {
     });
 }
 
+function request(url) {
 
+    return new Promise((res) => {
+        const delayTime = Math.floor(Math.random() * 10000) + 1;
+
+        setTimeout(() => res(url), delayTime);
+    });
+}
+
+function resolveUrlsArray(urls) {
+    var promisesArray = urls.map(function (url) {
+        return request(url);
+    });
+
+    var resultArray = [];
+    return new Promise(function (resolve) {
+        for (var i = 0; i < promisesArray.length; i++) {
+            promisesArray[i].then(function (res) {
+                resultArray.push(res);
+                if (resultArray.length === promisesArray.length) resolve(resultArray);
+            });
+        }
+    })
+}
