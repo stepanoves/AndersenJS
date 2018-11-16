@@ -1,18 +1,21 @@
 function debounce(func, delay) {
     var timeoutID;
 
-    function debounced(value) {
+    function debounced() {
 
-        if (timeoutID !== undefined) clearTimeout(timeoutID);
+        var args = arguments;
+
+        if (timeoutID) clearTimeout(timeoutID);
 
         timeoutID = setTimeout(function () {
-            func(value);
+            func(args);
         }, delay);
 
     }
 
     return debounced;
 }
+
 
 
 
