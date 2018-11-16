@@ -18,25 +18,25 @@ function debounce(func, delay) {
 
 
 function promisifySetTimeout(func, delay) {
-    
+
     return new Promise(function (resolve) {
        setTimeout(func, delay);
        resolve('result');
     });
 }
 
+function promisifyXMLHttpRequest(url, method) {
+    return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest(url);
+        xhr.open(url, method, true);
+        xhr.send();
 
-promisifySetTimeout(function () {
-    console.log('1');
-}, 1000)
-    .then(function (result) {
-        console.log(result);
-        return promisifySetTimeout(function () {
-            console.log('2');
-        }, 1000)
-    })
-    .then(function (result) {
-        console.log(result);
+        if (xhr.status === '200') {
+            resolve(xhr.responseText);
+        } else {
+            reject(xhr.status);
+        }
     });
+}
 
 
