@@ -17,26 +17,38 @@ function debounce(func, delay) {
 }
 
 
-function promisifySetTimeout(func, delay) {
+function promisifySetTimeout(delay) {
 
     return new Promise(function (resolve) {
-       setTimeout(func, delay);
-       resolve('result');
+       setTimeout(function () {
+           resolve('Прошло: ' + delay + 'мс');
+       }, delay);
+
     });
 }
 
-function promisifyXMLHttpRequest(url, method) {
+function promisifyXMLHttpRequest(url, method, body) {
 
     return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest(url);
-        xhr.open(url, method, true);
-        xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
 
-        if (xhr.status === '200') {
-            resolve(xhr.responseText);
-        } else {
-            reject(xhr.status);
-        }
+        xhr.onload = function () {
+
+            if (this.status === 200) {
+                resolve(this.responseText);
+            } else {
+                reject(this.status + ' : ' + this.statusText);
+            }
+
+        };
+
+        xhr.onerror = function () {
+            reject(this.statusText);
+        };
+
+        // if(body === undefined) body = null;
+        xhr.send(body);
     });
 }
 
@@ -55,12 +67,21 @@ function resolveUrlsArray(urls) {
     });
 
     var resultArray = [];
-    return new Promise(function (resolve) {
+
+    return new Promise(function (resolve, reject) {
+
         for (var i = 0; i < promisesArray.length; i++) {
-            promisesArray[i].then(function (res) {
-                resultArray.push(res);
-                if (resultArray.length === promisesArray.length) resolve(resultArray);
-            });
+            promisesArray[i]
+                .then(function (res) {
+                    resultArray.push(res);
+
+                    if (resultArray.length === promisesArray.length) resolve(resultArray);
+
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
         }
+
     })
 }
