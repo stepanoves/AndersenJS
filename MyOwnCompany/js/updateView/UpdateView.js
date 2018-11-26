@@ -25,15 +25,10 @@ var UpdateView = (function () {
             developerUpdateDiv.setAttribute('class', 'update');
             developerUpdateDiv.setAttribute('id', ''+i);
             developerUpdateDiv.innerText = 'Повысить';
-            var developerFireDiv = document.createElement('a');
-            developerFireDiv.setAttribute('href', '#');
-            developerFireDiv.setAttribute('class', 'fire developer');
-            developerFireDiv.setAttribute('id', ''+i);
-            developerFireDiv.innerText = 'Уволить';
+
             freeDeveloperDiv.appendChild(developerNameDiv);
             freeDeveloperDiv.appendChild(developerPositionDiv);
             freeDeveloperDiv.appendChild(developerUpdateDiv);
-            freeDeveloperDiv.appendChild(developerFireDiv);
             freeDevelopersDiv.appendChild(freeDeveloperDiv);
         }
     };
@@ -47,13 +42,7 @@ var UpdateView = (function () {
             var managerNameDiv = document.createElement('div');
             managerNameDiv.setAttribute('class', 'col-8');
             managerNameDiv.innerText = freeManagers[i].surname + ' ' + freeManagers[i].name;
-            var managerFireDiv = document.createElement('a');
-            managerFireDiv.setAttribute('href', '#');
-            managerFireDiv.setAttribute('class', 'fire developer');
-            managerFireDiv.setAttribute('href', ''+i);
-            managerFireDiv.innerText = 'Уволить';
             freeManagerDiv.appendChild(managerNameDiv);
-            freeManagerDiv.appendChild(managerFireDiv);
             freeManagersDiv.appendChild(freeManagerDiv);
         }
     };

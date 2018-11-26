@@ -1,12 +1,10 @@
 ;(function () {
     var titleField = document.querySelector('.title');
     var budgetField = document.querySelector('.budget');
-
     var startButton = document.querySelector('.start-btn');
     var addDevButton = document.querySelector('.add-dev');
     var addManagerButton = document.querySelector('.add-mngr');
     var addProjectButton = document.querySelector('.add-project');
-
     var projectTitleField = document.querySelector('.project-title');
     var projectCostField = document.querySelector('.project-cost');
     var devsQuantityField = document.querySelector('.devs-quantity');

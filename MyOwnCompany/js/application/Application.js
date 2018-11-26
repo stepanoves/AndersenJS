@@ -27,11 +27,6 @@ var Application = (function () {
     };
 
     Application.prototype.everyTurn = function () {
-        if (this.company.budget < 0) {
-            clearInterval(timerId);
-            alert('Вы проиграли')
-        }
-
         this.company.checkProjectsList();
         this.company.paySalaries();
         updateView.updateBudget(currentBudget, this.company.budget);
@@ -39,6 +34,11 @@ var Application = (function () {
         updateView.updateProjects(processProjDiv, this.company.getProjetsByStatus(true));
         updateView.updateManagers(freeManDiv, this.company.freeManagersList);
         updateView.updateDevelopers(freeDevDiv, this.company.freeDevelopersList);
+
+        if (this.company.budget < 0) {
+            clearInterval(timerId);
+            alert('Вы проиграли')
+        }
     };
 
     return Application;
