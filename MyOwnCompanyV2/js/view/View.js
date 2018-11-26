@@ -2,16 +2,8 @@ class View {
 
     constructor(){
         this.__itemView = new ItemView();
-        this.__fireButton = new FireButton();
     };
 
-    updateProjects(projects, projectDiv) {
-        projectDiv.innerHTML = null;
-
-        for(let project of projects) {
-            projectDiv.appendChild(this.__itemView.generate(project));
-        }
-    }
     updateItems(itemList, itemDiv) {
         itemDiv.innerHTML = null;
 
