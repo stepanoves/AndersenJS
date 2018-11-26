@@ -25,7 +25,6 @@ var UpdateView = (function () {
             developerUpdateDiv.setAttribute('class', 'update');
             developerUpdateDiv.setAttribute('id', ''+i);
             developerUpdateDiv.innerText = 'Повысить';
-
             freeDeveloperDiv.appendChild(developerNameDiv);
             freeDeveloperDiv.appendChild(developerPositionDiv);
             freeDeveloperDiv.appendChild(developerUpdateDiv);
