@@ -22,7 +22,7 @@ http.createServer((request, response) => {
             let fileName = request.url.split('/');
             let fileType = fileName[fileName.length - 1].split('.')[1];
 
-            response.setHeader('Content-type', fileType);
+            response.setHeader('Content-type', contentType[fileType]);
             response.end(data);
         }
 
