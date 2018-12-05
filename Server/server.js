@@ -4,26 +4,29 @@ const path = require('path');
 
 const dir = path.join(__dirname, '../MyOwnCompanyV2');
 const contentType = {
-    html: 'text/html',
-    js: 'text/javascript'
+    '.html': 'text/html',
+    '.js': 'text/javascript'
 };
 
 http.createServer((request, response) => {
 
-    let filePath = path.join(dir, request.url);
+    const filePath = path.join(dir, request.url);
 
     fs.readFile(filePath, (error, data) => {
 
         if (error) {
-            response.status = 404;
+            response.status = 500;
             response.end('File not found');
+            // response.status(500).end('File not found'); // Так не работает
         } else {
 
-            let fileName = request.url.split('/');
-            let fileType = fileName[fileName.length - 1].split('.')[1];
+            for (type in contentType) {
+                if (request.url.indexOf(type) !== -1) {
+                    response.setHeader('Content-type', contentType[type]);
+                    response.end(data);
+                }
+            }
 
-            response.setHeader('Content-type', contentType[fileType]);
-            response.end(data);
         }
 
         });
